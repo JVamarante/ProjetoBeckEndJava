@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+
 @RestController
 @RequestMapping("/alunos")
 public class AlunoController {
@@ -19,4 +23,26 @@ public class AlunoController {
         alunoService.criaAluno(aluno);
         
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Aluno> listarTodosAlunos(){
+        return alunoService.listarTodosAlunos();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<Aluno> buscarAlunoPorId(@PathVariable Long id){
+        return alunoService.buscarAlunoPorId(id);
+
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarAlunoPorId(@PathVariable Long id){
+        alunoService.deletarAlunoPorId(id);
+    }
+
+
+
 }
