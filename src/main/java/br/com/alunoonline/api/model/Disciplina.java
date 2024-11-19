@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 public class Disciplina implements Serializable {
@@ -22,6 +22,5 @@ public class Disciplina implements Serializable {
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
-
 
 }

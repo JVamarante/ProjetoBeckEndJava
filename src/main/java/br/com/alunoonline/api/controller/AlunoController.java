@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 @RestController
 @RequestMapping("/alunos")
@@ -19,35 +18,32 @@ public class AlunoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criaAluno(@RequestBody Aluno aluno) {
-        alunoService.criaAluno(aluno);
-        
+    public void criarAluno(@RequestBody Aluno aluno) {
+        alunoService.criarAluno(aluno);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Aluno> listarTodosAlunos(){
+    public List<Aluno> listarTodosAlunos() {
         return alunoService.listarTodosAlunos();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Aluno> buscarAlunoPorId(@PathVariable Long id){
+    public Optional<Aluno> buscarAlunoPorId(@PathVariable Long id) {
         return alunoService.buscarAlunoPorId(id);
-
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletarAlunoPorId(@PathVariable Long id){
+    public void deletarAlunoPorId(@PathVariable Long id) {
         alunoService.deletarAlunoPorId(id);
     }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarAlunoPorId(@PathVariable Long id, @RequestBody Aluno aluno){
+    public void atualizarAlunoPorId(@PathVariable Long id, @RequestBody Aluno aluno) {
         alunoService.atualizarAlunoPorId(id, aluno);
     }
-
-
 
 }

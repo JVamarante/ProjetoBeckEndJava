@@ -16,42 +16,44 @@ public class AlunoService {
     @Autowired
     AlunoRepository alunoRepository;
 
-    public void criaAluno(Aluno aluno) {
+    public void criarAluno(Aluno aluno) {
         alunoRepository.save(aluno);
     }
 
-    public List<Aluno> listarTodosAlunos(){
+    public List<Aluno> listarTodosAlunos() {
         return alunoRepository.findAll();
     }
 
-    public Optional<Aluno> buscarAlunoPorId(Long id){
+    public Optional<Aluno> buscarAlunoPorId(Long id) {
         return alunoRepository.findById(id);
-
     }
-    public void deletarAlunoPorId(Long id){
+
+    public void deletarAlunoPorId(Long id) {
         alunoRepository.deleteById(id);
-
     }
-    public void atualizarAlunoPorId(Long id, Aluno aluno){
-        // Primeiro passo: Verificar se o aluno existe no banco de dados
+
+    public void atualizarAlunoPorId(Long id, Aluno aluno) {
+        // PRIMEIRO PASSO: VER SE O ALUNO EXISTE NO BD
         Optional<Aluno> alunoDoBancoDeDados = buscarAlunoPorId(id);
 
-        // Se o aluno não for encontrado, lança exceção
+        // E SE NÃO EXISTIR???
         if (alunoDoBancoDeDados.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não encontrado no banco de dados");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não encontrado do banco de dados");
         }
 
-        // Se o aluno existe, fazer a atualização
+        // SE CHEGAR AQUI, SIGNIFICA QUE EXISTE ALUNO! ENTÃO
+        // VOU ARMAZENA-LO EM UMA VARIAVEL
         Aluno alunoEditado = alunoDoBancoDeDados.get();
 
-        // Aqui, todos os campos são atualizados com os valores fornecidos, mesmo que sejam null
+        // COM ESSE ALUNO EDITADO DE CIMA, FAÇO
+        // OS SETS NECESSÁRIOS PARA ATUALIZAR OS ATRIBUTOS DELE.
         alunoEditado.setNome(aluno.getNome());
         alunoEditado.setCpf(aluno.getCpf());
         alunoEditado.setEmail(aluno.getEmail());
 
-        // Persistir o aluno atualizado no banco de dados
+        // COM O ALUNO TOTALMENTE EDITADO ACIMA
+        // EU DEVOLVO ELE EDITADO/ATUALIZADO PARA O BANCO DE DADOS
         alunoRepository.save(alunoEditado);
+
     }
-
-
 }
